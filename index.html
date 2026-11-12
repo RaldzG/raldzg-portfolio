@@ -1,771 +1,98 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="RaldzG — Video Editor & Content Creator. Video editing, original music and story videos, plus Android apps, websites and UI/UX design.">
-<title>RaldzG — Video Editor &amp; Content Creator</title>
-<link rel="icon" href="raldzg-logo-round.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@600&family=Space+Mono:wght@700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="RaldzG143 — independent Roblox game developer, solo creator and owner of EGGORA, currently public for testing and 55% complete.">
+<title>RaldzG143 | Roblox Game Developer</title>
 <style>
-:root{
- --bg:#05070a;--bg2:#070a10;--surface:#0e131c;--surface2:#131a26;
- --text:#eef1f4;--muted:#96a2ae;--muted-dim:#6c7580;
- --gold:#e3ab4f;--gold-hi:#f6cf7c;--gold-dim:#8a6a34;
- --line:rgba(227,171,79,.16);--line-soft:rgba(238,241,244,.08);
- --blue:#2f7fd6;--max:1180px;--radius:20px;
- --c-green:#8fe07a;--c-blue:#4cb6f5;--c-purple:#c07af0;--c-orange:#f0954a;--c-red:#f26c63;--c-gold:#f2c359;--c-cyan:#57d3ec;
- --glass-bg:rgba(20,25,34,.5);--glass-bg-soft:rgba(18,23,32,.38);--glass-border:rgba(255,255,255,.09);
- --glass-blur:18px;--shadow-card:0 24px 60px -24px rgba(0,0,0,.65);--shadow-lift:0 30px 70px -20px rgba(0,0,0,.7);
- --ease:cubic-bezier(.16,.84,.24,1);
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
-body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.55;
- background:
-  radial-gradient(1100px 560px at 108% -6%,rgba(47,127,214,.16),transparent 60%),
-  radial-gradient(900px 520px at -6% 12%,rgba(227,171,79,.10),transparent 55%),
-  radial-gradient(700px 500px at 50% 108%,rgba(227,171,79,.06),transparent 60%);
-}
-body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;background-image:radial-gradient(rgba(227,171,79,.35) 1px,transparent 1.4px);background-size:26px 26px;background-position:-6px -6px;-webkit-mask-image:radial-gradient(1400px 900px at 50% 0%,#000 0%,transparent 78%);mask-image:radial-gradient(1400px 900px at 50% 0%,#000 0%,transparent 78%);animation:bgDrift 40s linear infinite}
-@keyframes bgDrift{0%{background-position:-6px -6px}100%{background-position:20px 20px}}
-a{text-decoration:none;color:inherit}
-.container{width:min(var(--max),calc(100% - 40px));margin:auto;position:relative;z-index:1}
-:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px;border-radius:6px}
-@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
-
-.display{font-family:"Bebas Neue",Inter,sans-serif;letter-spacing:.01em}
-
-/* NAV */
-.nav{position:sticky;top:0;z-index:50;background:rgba(11,9,4,.82);backdrop-filter:blur(16px);border-bottom:1px solid var(--line-soft)}
-.nav-inner{height:74px;display:flex;align-items:center;justify-content:space-between;gap:22px}
-.logo-wrap{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;overflow:hidden;background:transparent;position:relative}
-.logo-wrap::before{content:'';position:absolute;inset:-6px;border-radius:50%;background:radial-gradient(circle,rgba(227,171,79,.35),transparent 70%);opacity:0;animation:logoPulse 3.2s ease-in-out infinite}
-@keyframes logoPulse{0%,100%{opacity:0;transform:scale(.85)}50%{opacity:1;transform:scale(1.15)}}
-.logo{height:78%;width:78%;object-fit:contain;display:block;position:relative;z-index:1}
-.nav-links{display:flex;gap:26px;color:#cdc3b3;font-size:14px;font-weight:600}
-.nav-links a{position:relative;padding:4px 0}
-.nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--gold-hi);transition:right .25s ease}
-.nav-links a:hover::after{right:0}
-.nav-links a:hover{color:var(--gold-hi)}
-.nav-cta{padding:10px 18px;border:1px solid var(--gold);border-radius:999px;color:var(--bg);background:var(--gold);font-weight:700;font-size:13px;transition:.2s}
-.nav-cta:hover{background:var(--gold-hi);border-color:var(--gold-hi)}
-
-/* HERO */
-.hero{padding:76px 0 84px;border-bottom:1px solid var(--line-soft);position:relative;overflow:hidden}
-@keyframes heroUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-@keyframes badgeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.hero .eyebrow{animation:heroUp .7s cubic-bezier(.2,.8,.2,1) both}
-.hero h1{animation:heroUp .7s cubic-bezier(.2,.8,.2,1) .12s both}
-.hero-copy{animation:heroUp .7s cubic-bezier(.2,.8,.2,1) .22s both}
-.hero .actions{animation:heroUp .7s cubic-bezier(.2,.8,.2,1) .32s both}
-.badge-card{animation:heroUp .8s cubic-bezier(.2,.8,.2,1) .3s both,badgeFloat 5s ease-in-out .9s infinite;transform-style:preserve-3d;will-change:transform;transition:box-shadow .3s}
-.badge-card:hover{box-shadow:0 40px 100px rgba(0,0,0,.6),0 0 0 1px var(--line)}
-.corner-accent path{stroke-dasharray:320;stroke-dashoffset:320;animation:draw 1.4s ease .3s forwards}
-.corner-accent circle{opacity:0;animation:heroUp .5s ease 1.4s forwards}
-@keyframes draw{to{stroke-dashoffset:0}}
-
-/* scroll reveal */
-.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
-.reveal.in{opacity:1;transform:translateY(0)}
-.skills .skill.reveal:nth-child(1),.video-grid .video-card.reveal:nth-child(1),.services .service.reveal:nth-child(1){transition-delay:.02s}
-.skills .skill.reveal:nth-child(2),.video-grid .video-card.reveal:nth-child(2),.services .service.reveal:nth-child(2){transition-delay:.09s}
-.skills .skill.reveal:nth-child(3),.video-grid .video-card.reveal:nth-child(3),.services .service.reveal:nth-child(3){transition-delay:.16s}
-.skills .skill.reveal:nth-child(4),.video-grid .video-card.reveal:nth-child(4),.services .service.reveal:nth-child(4){transition-delay:.23s}
-.skills .skill.reveal:nth-child(5){transition-delay:.30s}
-.skills .skill.reveal:nth-child(6){transition-delay:.37s}
-.skills .skill.reveal:nth-child(7){transition-delay:.44s}
-
-/* nav scroll state */
-.nav.scrolled{background:rgba(5,7,10,.92);box-shadow:0 10px 30px -12px rgba(0,0,0,.5)}
-
-/* button shine */
-.btn.primary{position:relative;overflow:hidden}
-.btn.primary::after{content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(115deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);transition:left .6s ease}
-.btn.primary:hover::after{left:130%}
-.corner-accent{position:absolute;top:18px;left:max(20px,calc((100% - var(--max))/2 + 20px));width:220px;height:auto;opacity:.85;pointer-events:none}
-.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:64px;align-items:center}
-.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:600;color:var(--muted)}
-.eyebrow i{width:7px;height:7px;border-radius:2px;background:var(--gold);display:inline-block;transform:rotate(45deg);animation:eyebrowPulse 2.2s ease-in-out infinite}
-@keyframes eyebrowPulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(227,171,79,.5)}50%{opacity:.55;box-shadow:0 0 8px 2px rgba(227,171,79,.35)}}
-h1{font-size:clamp(46px,7vw,84px);line-height:.98;margin:20px 0 22px;font-weight:800;letter-spacing:-.02em;color:var(--text)}
-h1 em{font-style:normal;color:var(--text);display:block}
-.hero-copy{max-width:520px;color:#cfc5b5;font-size:18px}
-.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 22px;border-radius:12px;font-size:14.5px;font-weight:700;border:1px solid var(--line);transition:.2s}
-.btn:hover{transform:translateY(-2px)}
-.primary{background:var(--gold);color:#160f04;border-color:var(--gold)}
-.primary:hover{background:var(--gold-hi);border-color:var(--gold-hi)}
-.secondary{background:var(--surface);color:var(--text)}
-.secondary:hover{border-color:var(--gold)}
-
-/* creator badge card */
-.badge-card{position:relative;width:min(340px,100%);margin-inline:auto;background:linear-gradient(160deg,var(--surface2),var(--surface));border:1px solid var(--line);border-radius:28px;padding:20px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
-.badge-clip{position:absolute;top:-13px;left:50%;transform:translateX(-50%);width:64px;height:26px;background:linear-gradient(160deg,var(--gold-hi),var(--gold));border-radius:8px;box-shadow:0 6px 16px rgba(227,171,79,.3)}
-.badge-photo{border-radius:18px;overflow:hidden;aspect-ratio:1/1;border:1px solid var(--line-soft);background:#000}
-.badge-photo img{width:100%;height:100%;object-fit:cover;display:block}
-.badge-meta{margin-top:18px;display:flex;align-items:baseline;justify-content:space-between;gap:10px}
-.badge-name{font-family:"Bebas Neue";font-size:30px;letter-spacing:.02em;color:var(--gold-hi)}
-.badge-role{font-size:12px;color:var(--muted);text-align:right;line-height:1.4}
-.badge-strip{margin-top:16px;display:flex;gap:3px;height:20px}
-.badge-strip span{flex:1;background:var(--line-soft);border-radius:1px}
-.badge-strip span:nth-child(3n){background:rgba(227,171,79,.35)}
-.badge-foot{margin-top:10px;display:flex;justify-content:space-between;font-size:10.5px;color:var(--muted-dim);letter-spacing:.04em}
-
-/* SECTION GENERIC */
-section{padding:78px 0}
-.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:34px;flex-wrap:wrap}
-h2{font-size:clamp(30px,4.2vw,46px);line-height:1.05;letter-spacing:-.02em;margin:10px 0 0;font-weight:800}
-.section-desc{max-width:520px;color:var(--muted);font-size:15.5px}
-
-/* ABOUT */
-.about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
-.about-main,.about-side{padding:34px;border-radius:var(--radius);border:1px solid var(--line-soft)}
-.about-main{background:linear-gradient(150deg,rgba(227,171,79,.10),rgba(255,255,255,.02))}
-.about-main p.lead{font-size:23px;line-height:1.35;color:#f0e9db;margin:0 0 16px;font-weight:600}
-.about-main p{color:#c8bda9;margin:0}
-.about-side{background:var(--surface);display:flex;flex-direction:column;justify-content:center}
-.about-side strong{font-size:20px}
-.about-side p{color:var(--muted);margin:8px 0 20px;font-size:14.5px}
-.pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
-.pill{font-size:12px;font-weight:600;color:#e9dcbe;background:rgba(227,171,79,.10);border:1px solid var(--line);padding:6px 12px;border-radius:999px;transition:transform .2s ease,background .2s ease,border-color .2s ease}
-.pill:hover{transform:translateY(-2px);background:rgba(227,171,79,.18);border-color:var(--gold)}
-
-/* SKILLS */
-.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
-.skill{padding:26px;border:1px solid var(--line-soft);border-radius:18px;background:var(--surface);transition:.2s}
-.skill:hover{transform:translateY(-4px);border-color:var(--mark)}
-.skill-mark{width:38px;height:38px;border-radius:10px;background:color-mix(in srgb, var(--mark) 16%, transparent);border:1px solid color-mix(in srgb, var(--mark) 45%, transparent);display:flex;align-items:center;justify-content:center;box-shadow:0 0 18px color-mix(in srgb, var(--mark) 35%, transparent);animation:iconBreathe 3.4s ease-in-out infinite}
-.skill:nth-child(2n) .skill-mark{animation-delay:.5s}
-.skill:nth-child(3n) .skill-mark{animation-delay:1s}
-@keyframes iconBreathe{0%,100%{box-shadow:0 0 18px color-mix(in srgb, var(--mark) 35%, transparent)}50%{box-shadow:0 0 26px 4px color-mix(in srgb, var(--mark) 55%, transparent)}}
-.skill-mark svg{width:19px;height:19px;stroke:var(--mark)}
-.skill h3{margin:20px 0 7px;font-size:19px;line-height:1.15;font-weight:700}
-.skill p{margin:0;color:var(--muted);font-size:14px}
-.skill.green{--mark:var(--c-green)}.skill.blue{--mark:var(--c-blue)}.skill.purple{--mark:var(--c-purple)}
-.skill.orange{--mark:var(--c-orange)}.skill.red{--mark:var(--c-red)}.skill.gold{--mark:var(--c-gold)}.skill.cyan{--mark:var(--c-cyan)}
-.skill-clickable{cursor:pointer;position:relative}
-.skill-clickable:hover{box-shadow:0 0 0 1px color-mix(in srgb, var(--mark) 45%, transparent)}
-.skill-hint{display:inline-block;margin-top:12px;font-size:12.5px;font-weight:700;color:var(--mark);opacity:0;transform:translateY(4px);transition:.2s}
-.skill-clickable:hover .skill-hint,.skill-clickable:focus-visible .skill-hint{opacity:1;transform:translateY(0)}
-
-/* CASE STUDY MODAL */
-.cs-modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(3,4,6,.72);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .22s ease}
-.cs-modal-overlay.open{opacity:1;pointer-events:auto}
-.cs-modal{position:relative;width:min(1040px,100%);max-height:88vh;overflow-y:auto;border-radius:20px;transform:translateY(14px) scale(.98);transition:transform .22s ease;box-shadow:0 40px 100px -20px rgba(0,0,0,.6)}
-.cs-modal-overlay.open .cs-modal{transform:translateY(0) scale(1)}
-.cs-modal-close{position:absolute;top:14px;right:14px;z-index:5;width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(10,14,20,.7);color:#fff;font-size:20px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.cs-modal-close:hover{background:rgba(10,14,20,.95)}
-.cs-modal .case-study{margin-bottom:0}
-
-/* WORK */
-.video-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-
-/* CASE STUDY MOCKUP — animated personal-portfolio landing page concept, scoped and isolated from main site styles */
-.case-study{margin-bottom:0;background:#06070B;border:1px solid var(--line-soft);border-radius:20px;overflow:hidden;font-family:'Poppins',var(--sans,sans-serif)}
-.pf-mock{position:relative}
-
-/* nav */
-.pf-nav{display:flex;align-items:center;justify-content:space-between;padding:16px 26px;border-bottom:1px solid rgba(255,255,255,.06)}
-.pf-logo{font-family:'Bebas Neue';font-size:22px;letter-spacing:.02em;color:var(--gold-hi)}
-.pf-nav-links{display:flex;gap:22px}
-.pf-nav-links a{font-size:12.5px;color:#c9cfda;position:relative;padding-bottom:6px}
-.pf-nav-links a.active{color:#fff;font-weight:600}
-.pf-nav-links a.active::after{content:'';position:absolute;left:50%;bottom:0;width:5px;height:5px;border-radius:50%;background:var(--gold-hi);transform:translateX(-50%);animation:pf-pulse 1.8s ease-in-out infinite}
-.pf-nav-cta{font-size:12px;font-weight:600;color:#fff;border:1px solid rgba(255,255,255,.18);padding:8px 14px;border-radius:8px;white-space:nowrap}
-@media(max-width:820px){.pf-nav-links{display:none}}
-
-/* hero */
-.pf-hero{position:relative;padding:40px 26px 46px;display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center;overflow:hidden;
- background:radial-gradient(600px 340px at 92% 10%,rgba(139,92,246,.14),transparent 60%),radial-gradient(500px 300px at 100% 60%,rgba(59,130,246,.10),transparent 60%),#06070B}
-.pf-eyebrow{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#8fe0a8;background:rgba(46,232,115,.08);border:1px solid rgba(46,232,115,.25);display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:100px;margin-bottom:16px}
-.pf-dot{width:6px;height:6px;border-radius:50%;background:#2ee873;box-shadow:0 0 8px #2ee873;animation:pf-pulse 1.8s ease-in-out infinite}
-@keyframes pf-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.4)}}
-.pf-h1{font-weight:700;font-size:clamp(22px,3vw,30px);line-height:1.18;color:#F4F7FB;letter-spacing:-.01em;margin:0 0 14px}
-.pf-accent{background:linear-gradient(90deg,#a78bfa,#60a5fa);-webkit-background-clip:text;background-clip:text;color:transparent}
-.pf-sub{font-size:13.5px;line-height:1.6;color:#9aa3b4;max-width:400px;margin:0 0 22px}
-.pf-cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px}
-.pf-btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-hi));color:#160f04;padding:11px 18px;border-radius:10px;font-weight:700;font-size:12.5px;display:inline-flex;align-items:center;gap:6px;box-shadow:0 8px 20px -6px rgba(227,171,79,.4)}
-.pf-btn-secondary{border:1.5px solid rgba(255,255,255,.14);color:#F4F7FB;padding:10px 17px;border-radius:8px;background:rgba(255,255,255,.02);font-weight:500;font-size:12.5px}
-.pf-tools-label{display:block;font-size:9.5px;letter-spacing:.12em;color:#57627A;text-transform:uppercase;margin-bottom:10px}
-.pf-tools-row{display:flex;gap:8px;flex-wrap:wrap}
-.pf-tool{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:var(--tc);background:color-mix(in srgb, var(--tc) 16%, #10131c);border:1px solid color-mix(in srgb, var(--tc) 35%, transparent);transition:transform .25s;animation:pf-bob 3.6s ease-in-out infinite}
-.pf-tool:nth-child(2){animation-delay:.2s}.pf-tool:nth-child(3){animation-delay:.4s}.pf-tool:nth-child(4){animation-delay:.6s}.pf-tool:nth-child(5){animation-delay:.8s}.pf-tool:nth-child(6){animation-delay:1s}
-.pf-tool:hover{transform:translateY(-3px) scale(1.08)}
-@keyframes pf-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
-
-/* hero visual: laptop + phone mockup with animated gradient blob */
-.pf-hero-visual{position:relative;min-height:280px;display:flex;align-items:center;justify-content:center}
-.pf-blob{position:absolute;width:230px;height:230px;border-radius:46% 54% 60% 40%/50% 45% 55% 50%;
- background:conic-gradient(from 0deg,#7c3aed,#3b82f6,#a855f7,#7c3aed);filter:blur(30px);opacity:.35;
- animation:pf-spin 14s linear infinite, pf-morph 8s ease-in-out infinite}
-@keyframes pf-spin{to{transform:rotate(360deg)}}
-@keyframes pf-morph{0%,100%{border-radius:46% 54% 60% 40%/50% 45% 55% 50%}50%{border-radius:60% 40% 45% 55%/45% 55% 45% 55%}}
-.pf-laptop{position:relative;width:78%;max-width:340px;border-radius:12px;overflow:hidden;background:#0c0f16;border:1px solid rgba(255,255,255,.1);
- box-shadow:0 30px 60px -20px rgba(0,0,0,.65);animation:pf-float 5s ease-in-out infinite;transform:perspective(900px) rotateX(2deg)}
-.pf-laptop-bar{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.08);background:#0a0c12}
-.pf-mini-logo{font-family:'Bebas Neue';font-size:12px;color:var(--gold-hi)}
-.pf-mini-nav{font-size:8px;color:#7d879a;display:none}
-@media(min-width:500px){.pf-mini-nav{display:inline}}
-.pf-mini-cta{font-size:8px;border:1px solid rgba(255,255,255,.16);padding:4px 8px;border-radius:5px;color:#fff}
-.pf-laptop-body{padding:20px 16px 26px;background:radial-gradient(220px 140px at 78% 30%,rgba(139,92,246,.22),transparent 65%)}
-.pf-laptop-body h5{margin:0 0 8px;font-size:15px;line-height:1.3;color:#fff;font-weight:700}
-.pf-laptop-body h5 span{background:linear-gradient(90deg,#a78bfa,#60a5fa);-webkit-background-clip:text;background-clip:text;color:transparent}
-.pf-laptop-body p{margin:0 0 12px;font-size:9.5px;color:#8890a0;max-width:220px}
-.pf-mini-btn{display:inline-block;font-size:9px;font-weight:700;color:#0b0c0f;background:var(--gold-hi);padding:6px 10px;border-radius:6px}
-.pf-phone{position:absolute;right:-4%;bottom:-8%;width:34%;max-width:118px;border-radius:16px;overflow:hidden;background:#0c0f16;border:1px solid rgba(255,255,255,.12);
- box-shadow:0 24px 50px -16px rgba(0,0,0,.7);animation:pf-float 5s ease-in-out infinite 1.2s}
-.pf-phone-bar{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.08)}
-.pf-mini-logo.sm{font-size:9px}
-.pf-phone-menu{font-size:10px;color:#8890a0}
-.pf-phone-body{padding:12px 10px 14px;background:radial-gradient(140px 100px at 70% 20%,rgba(96,165,250,.2),transparent 65%)}
-.pf-phone-body h6{margin:0 0 8px;font-size:9.5px;line-height:1.35;color:#fff;font-weight:700}
-.pf-phone-body h6 span{color:#a78bfa}
-.pf-mini-btn.sm{font-size:7.5px;padding:5px 8px;margin-bottom:10px}
-.pf-phone-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:6px 8px;font-size:7px;color:#8890a0}
-.pf-phone-card b{display:block;color:var(--gold-hi);font-size:9px}
-@keyframes pf-float{0%,100%{transform:translateY(0) perspective(900px) rotateX(2deg)}50%{transform:translateY(-9px) perspective(900px) rotateX(2deg)}}
-.pf-stat-card{position:absolute;left:6%;bottom:10%;background:rgba(15,18,26,.75);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.1);border-radius:12px;
- padding:10px 14px;box-shadow:0 16px 34px -14px rgba(0,0,0,.6);animation:pf-float 5s ease-in-out infinite .4s}
-.pf-stat-card strong{display:block;font-size:17px;color:#a78bfa;line-height:1.1}
-.pf-stat-card span{font-size:9px;color:#8890a0}
-
-/* work grid */
-.pf-work{padding:36px 26px 8px}
-.pf-work-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:18px;gap:14px;flex-wrap:wrap}
-.pf-eyebrow-plain{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-hi);font-weight:700}
-.pf-work-head h5{margin:6px 0 0;font-size:21px;color:#fff;font-weight:700}
-.pf-view-all{font-size:12px;color:#9aa3b4;white-space:nowrap}
-.pf-project-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.pf-project{background:#0b0d13;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:14px;transition:transform .25s,border-color .25s,box-shadow .25s}
-.pf-project:hover{transform:translateY(-4px);border-color:rgba(167,139,250,.35);box-shadow:0 18px 34px -18px rgba(0,0,0,.6)}
-.pf-thumb{height:78px;border-radius:9px;margin-bottom:10px;position:relative;overflow:hidden}
-.pf-thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.08) 50%,transparent 60%);background-size:250% 100%;animation:pf-sheen 3.5s ease-in-out infinite}
-@keyframes pf-sheen{0%{background-position:150% 0}100%{background-position:-50% 0}}
-.pf-thumb-1{background:linear-gradient(150deg,#141a2e,#241a45 60%,#3b2a63)}
-.pf-thumb-2{background:linear-gradient(150deg,#1a1420,#2e1b3d 55%,#4a2258)}
-.pf-thumb-3{background:linear-gradient(150deg,#131a2a,#1c2c52 55%,#2a3f7a)}
-.pf-thumb-4{background:linear-gradient(150deg,#1c1712,#3a2c1a 55%,#5c4322)}
-.pf-pnum{font-size:11px;color:#57627A;font-weight:700}
-.pf-project h6{margin:4px 0 8px;font-size:13.5px;color:#fff;font-weight:600}
-.pf-tags{display:flex;gap:6px;flex-wrap:wrap}
-.pf-tags span{font-size:9.5px;color:#9aa3b4;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);padding:3px 8px;border-radius:6px}
-
-/* feature strip */
-.pf-features{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:24px 26px 30px;border-top:1px solid rgba(255,255,255,.06);margin-top:28px}
-.pf-feature{display:flex;align-items:center;gap:10px}
-.pf-fico{width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold-hi)}
-.pf-fico svg{width:15px;height:15px}
-.pf-feature strong{display:block;font-size:12px;color:#fff}
-.pf-feature span{font-size:10.5px;color:#8890a0}
-@media(max-width:900px){.pf-features{grid-template-columns:repeat(2,1fr)}.pf-project-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:700px){.pf-hero{grid-template-columns:1fr}.pf-hero-visual{margin-top:20px}}
-@media(max-width:520px){.pf-features{grid-template-columns:1fr}}
-
-.cs-caption{padding:22px 26px;background:var(--surface)}
-.cs-caption .tag{font-size:11px;font-weight:700;color:var(--gold-hi);margin-bottom:6px;display:block}
-.cs-caption h3{margin:0 0 8px;font-size:19px;font-weight:700}
-.cs-caption p{margin:0;color:var(--muted);font-size:14px;max-width:640px}
-
-/* APP SHOWCASE MOCKUP — Android app concept, scoped with ap- prefix */
-.ap-mock{padding:34px 26px 0;background:radial-gradient(900px 500px at 50% -10%,rgba(227,171,79,.08),transparent 60%),#06070B}
-.ap-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:14px;margin-bottom:26px}
-.ap-brand{display:flex;align-items:center;gap:10px}
-.ap-brand-mark{font-family:'Bebas Neue';font-size:22px;color:var(--gold-hi);border:1px solid var(--line);border-radius:8px;padding:2px 8px}
-.ap-brand strong{display:block;font-size:15px;color:#fff}
-.ap-brand small{font-size:9px;letter-spacing:.12em;color:var(--gold-hi)}
-.ap-tagline{font-size:13px;color:#9aa3b4;max-width:220px;text-align:right;margin:0}
-
-.ap-phones{position:relative;display:flex;justify-content:center;align-items:center;gap:-10px;min-height:360px;margin-bottom:8px}
-.ap-ring{position:absolute;width:230px;height:230px;border-radius:50%;border:1.5px solid transparent;border-top-color:var(--gold);border-right-color:rgba(227,171,79,.4);filter:blur(.3px);opacity:.7}
-.cs-modal-overlay.open .ap-ring{animation:apSpin 16s linear infinite}
-@keyframes apSpin{to{transform:rotate(360deg)}}
-.ap-rock{position:absolute;width:9px;height:9px;background:linear-gradient(145deg,#3a2f1c,#12100a);border-radius:3px;box-shadow:0 4px 10px rgba(0,0,0,.5)}
-.ap-rock.r1{top:18%;left:20%}.ap-rock.r2{bottom:14%;left:14%}.ap-rock.r3{top:12%;right:18%}.ap-rock.r4{bottom:20%;right:12%}
-.cs-modal-overlay.open .ap-rock{animation:apRockFloat 6s ease-in-out infinite}
-.cs-modal-overlay.open .ap-rock.r2{animation-delay:1.2s}.cs-modal-overlay.open .ap-rock.r3{animation-delay:2.1s}.cs-modal-overlay.open .ap-rock.r4{animation-delay:3s}
-@keyframes apRockFloat{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-10px) rotate(45deg)}}
-
-.ap-phone{position:relative;width:150px;background:#0a0c12;border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:10px 9px;box-shadow:0 26px 60px -18px rgba(0,0,0,.7);opacity:0}
-.ap-phone-left,.ap-phone-right{margin-top:34px}
-.ap-phone-center{width:172px;z-index:2;border-color:rgba(227,171,79,.35);box-shadow:0 30px 70px -16px rgba(0,0,0,.75),0 0 40px -10px rgba(227,171,79,.25)}
-.ap-phone-left{margin-right:-14px}
-.ap-phone-right{margin-left:-14px}
-.cs-modal-overlay.open .ap-phone-left{animation:apUp .6s var(--ease) .05s both,apFloat 4.6s ease-in-out 1s infinite}
-.cs-modal-overlay.open .ap-phone-center{animation:apUp .6s var(--ease) .16s both,apFloat 4.6s ease-in-out 1.3s infinite}
-.cs-modal-overlay.open .ap-phone-right{animation:apUp .6s var(--ease) .27s both,apFloat 4.6s ease-in-out 1.6s infinite}
-@keyframes apUp{from{opacity:0;transform:translateY(30px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
-@keyframes apFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.ap-status{display:flex;justify-content:space-between;font-size:8px;color:#8890a0;padding:2px 4px 6px;font-family:'Space Mono',monospace}
-.ap-screen{background:linear-gradient(160deg,#0d1017,#0a0c11);border-radius:14px;padding:12px 10px;min-height:200px}
-.ap-hey{margin:0 0 3px;font-size:12px;color:#fff;font-weight:700}
-.ap-sub{margin:0 0 10px;font-size:8px;color:#8890a0;line-height:1.4}
-.ap-label{font-size:8px;color:#57627A;letter-spacing:.08em;text-transform:uppercase}
-.ap-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
-.ap-stat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:7px 8px}
-.ap-stat strong{display:block;font-size:13px;color:var(--gold-hi)}
-.ap-stat span{font-size:7px;color:#8890a0}
-.ap-screen-hero{background:radial-gradient(140px 100px at 75% 15%,rgba(227,171,79,.16),transparent 65%),linear-gradient(160deg,#0d1017,#0a0c11)}
-.ap-hero-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.ap-menu{color:#8890a0;font-size:13px}
-.ap-avatar{width:20px;height:20px;border-radius:50%;background:linear-gradient(145deg,#3a2f1c,#0d0d0d);border:1.5px solid var(--gold)}
-.ap-h1{font-family:'Bebas Neue';font-size:30px;color:var(--gold-hi);margin:0 0 2px;letter-spacing:.01em}
-.ap-sub2{font-size:9px;color:#9aa3b4;display:block;margin-bottom:8px}
-.ap-desc{font-size:8.5px;color:#8890a0;line-height:1.5;margin:0 0 12px}
-.ap-cta-row{display:flex;flex-direction:column;gap:6px;align-items:flex-start;margin-bottom:14px}
-.ap-btn{font-size:8.5px;font-weight:700;color:#160f04;background:linear-gradient(135deg,var(--gold),var(--gold-hi));padding:6px 10px;border-radius:7px}
-.ap-play{font-size:8px;color:#fff;display:inline-flex;align-items:center;gap:5px}
-.ap-device-stack{position:relative;height:46px}
-.ap-laptop{position:absolute;left:0;bottom:0;width:70%;height:34px;background:#12151d;border:1px solid rgba(255,255,255,.1);border-radius:5px 5px 0 0}
-.ap-mini-phone{position:absolute;right:4px;bottom:-2px;width:20px;height:40px;background:#12151d;border:1px solid rgba(255,255,255,.14);border-radius:6px}
-.ap-proj-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
-.ap-proj-head strong{font-size:11px;color:#fff}
-.ap-proj-head small{font-size:7.5px;color:var(--gold-hi)}
-.ap-filter-row{display:flex;gap:5px;margin-bottom:10px;flex-wrap:wrap}
-.ap-filter-row span{font-size:7px;padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.05);color:#9aa3b4}
-.ap-filter-row span.active{background:var(--gold);color:#160f04;font-weight:700}
-.ap-proj-card{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:6px 8px;margin-bottom:6px;transition:transform .2s ease,border-color .2s ease}
-.ap-proj-card:hover{transform:translateX(3px);border-color:rgba(227,171,79,.3)}
-.ap-pnum{font-size:9px;color:var(--gold-hi);font-weight:700}
-.ap-proj-card b{display:block;font-size:8.5px;color:#fff}
-.ap-proj-card small{font-size:7px;color:#8890a0}
-
-.ap-services{padding:34px 0 6px}
-.ap-services-title{font-size:20px;color:#fff;font-weight:700;margin:0 0 18px}
-.ap-services-title span{color:var(--gold-hi)}
-.ap-service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.ap-service{display:flex;align-items:center;gap:12px;padding:16px;border:1px solid rgba(255,255,255,.07);border-radius:14px;background:rgba(255,255,255,.02);transition:transform .25s ease,border-color .25s ease,background .25s ease}
-.ap-service:hover{transform:translateY(-3px);border-color:rgba(227,171,79,.3);background:rgba(255,255,255,.04)}
-.ap-sico{width:34px;height:34px;flex-shrink:0;border-radius:9px;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb, var(--sc) 16%, transparent);border:1px solid color-mix(in srgb, var(--sc) 40%, transparent);color:var(--sc)}
-.ap-sico svg{width:16px;height:16px}
-.ap-sico.green{--sc:var(--c-green)}.ap-sico.blue{--sc:var(--c-blue)}.ap-sico.purple{--sc:var(--c-purple)}
-.ap-sico.orange{--sc:var(--c-orange)}.ap-sico.red{--sc:var(--c-red)}.ap-sico.cyan{--sc:var(--c-cyan)}
-.ap-service b{display:block;font-size:13px;color:#fff;margin-bottom:2px}
-.ap-service small{font-size:11.5px;color:#8890a0;line-height:1.4}
-.ap-arrow{margin-left:auto;color:#57627A;font-size:15px;transition:transform .25s ease,color .25s ease;flex-shrink:0}
-.ap-service:hover .ap-arrow{transform:translateX(4px);color:var(--gold-hi)}
-.ap-cta-bar{display:flex;align-items:center;gap:14px;margin-top:20px;padding:18px 20px;border-radius:16px;background:rgba(227,171,79,.06);border:1px solid rgba(227,171,79,.2)}
-.ap-bolt{width:30px;height:30px;border-radius:50%;background:var(--gold);color:#160f04;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.cs-modal-overlay.open .ap-bolt{animation:apPulse 2s ease-in-out infinite}
-@keyframes apPulse{0%,100%{box-shadow:0 0 0 0 rgba(227,171,79,.5)}50%{box-shadow:0 0 0 8px rgba(227,171,79,0)}}
-.ap-cta-bar p{flex:1;margin:0;font-size:14px;color:#fff;font-weight:600}
-.ap-start-btn{font-size:12.5px;font-weight:700;color:#160f04;background:linear-gradient(135deg,var(--gold),var(--gold-hi));padding:10px 16px;border-radius:9px;white-space:nowrap;transition:transform .2s ease}
-.ap-start-btn:hover{transform:translateY(-2px)}
-@media(max-width:820px){.ap-phones{flex-wrap:wrap}.ap-phone-left,.ap-phone-right{display:none}.ap-phone-center{margin:0 auto}}
-@media(max-width:700px){.ap-service-grid{grid-template-columns:1fr 1fr}.ap-top{flex-direction:column}.ap-tagline{text-align:left}}
-@media(max-width:480px){.ap-service-grid{grid-template-columns:1fr}}
-@media(prefers-reduced-motion: reduce){
- .ap-ring,.ap-rock,.ap-phone-left,.ap-phone-center,.ap-phone-right,.ap-bolt{animation:none!important;opacity:1!important}
-}
-@media(prefers-reduced-motion: reduce){
- .pf-blob,.pf-laptop,.pf-phone,.pf-stat-card,.pf-tool,.pf-dot,.pf-thumb::after{animation:none}
-}
-
-.video-card{overflow:hidden;border:1px solid var(--line-soft);border-radius:20px;background:var(--surface);box-shadow:0 18px 50px rgba(0,0,0,.25)}
-.video-wrap{background:#000;aspect-ratio:9/16;overflow:hidden}
-.video-wrap video{width:100%;height:100%;display:block;object-fit:cover;transition:transform .5s ease}
-.video-card:hover .video-wrap video{transform:scale(1.05)}
-.video-info{padding:18px}
-.tag{font-size:11px;font-weight:700;color:var(--gold-hi)}
-.video-info h3{margin:7px 0;font-size:20px;line-height:1.1;font-weight:700}
-.video-info p{margin:0;color:var(--muted);font-size:13.5px}
-
-/* SERVICES */
-.services{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.service{padding:28px;border:1px solid var(--line-soft);border-radius:18px;background:var(--surface);position:relative;overflow:hidden;transition:transform .25s ease,border-color .25s ease}
-.service::before{content:'';position:absolute;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-hi));transition:width .35s ease}
-.service:hover{transform:translateY(-4px);border-color:rgba(227,171,79,.35)}
-.service:hover::before{width:100%}
-.service h3{margin:0 0 8px;font-size:20px;font-weight:700}
-.service p{margin:0;color:var(--muted);font-size:14.5px}
-
-/* CONTACT */
-.cta{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
-.cta-main,.cta-side{padding:34px;border-radius:24px;border:1px solid var(--line-soft)}
-.cta-main{background:linear-gradient(150deg,rgba(227,171,79,.12),rgba(255,255,255,.02))}
-.cta-main p{color:var(--muted);max-width:480px}
-.signoff{font-family:"Caveat",cursive;font-size:28px;color:var(--text);margin:6px 0 0!important;max-width:none!important}
-.signoff em{font-style:normal;color:var(--gold-hi);text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:5px}
-.cta-side{background:var(--surface)}
-.cta-side strong{font-size:22px}
-.contact-line{color:var(--muted);margin:5px 0 4px;font-size:14.5px}
-
-footer{border-top:1px solid var(--line-soft);padding:28px 0 44px;color:var(--muted-dim);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
-
-@media(max-width:900px){
- .hero-grid,.cta,.about-grid{grid-template-columns:1fr}
- .skills{grid-template-columns:1fr 1fr}
- .video-grid{grid-template-columns:1fr 1fr}
- .nav-links{display:none}
-}
-@media(max-width:600px){
- .container{width:calc(100% - 24px)}
- .hero{padding-top:52px}
- .skills,.video-grid,.services{grid-template-columns:1fr}
- .nav-inner{height:64px}
- .logo-wrap{width:42px;height:42px}
- section{padding:56px 0}
-}
+:root{--bg:#050b1b;--panel:#0d1932;--panel2:#12264a;--line:rgba(91,160,255,.28);--text:#f4f8ff;--muted:#b5c5df;--cyan:#35dcff;--blue:#268cff;--violet:#9b79ff;--glow:0 18px 55px rgba(0,112,255,.16)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0;background:radial-gradient(ellipse at 82% 8%,rgba(25,91,190,.32),transparent 34%),radial-gradient(ellipse at 4% 38%,rgba(50,40,140,.18),transparent 32%),linear-gradient(145deg,#050a18,#08152e 54%,#050b1b);color:var(--text);font:16px/1.7 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;letter-spacing:.005em}body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.15;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(to bottom,black,transparent 75%)}a{color:inherit;text-decoration:none}.wrap{width:min(1160px,91%);margin:auto;position:relative}nav{display:flex;justify-content:space-between;align-items:center;padding:22px 0;border-bottom:1px solid rgba(151,190,255,.14);gap:24px}.logo{font-weight:950;letter-spacing:.09em;font-size:17px}.logo span{color:var(--cyan);text-shadow:0 0 20px #35dcff88}.navlinks{display:flex;gap:24px;color:#b8c8e3;font-size:13px;font-weight:650}.navlinks a{transition:color .2s}.navlinks a:hover{color:var(--cyan)}
+.hero{padding:86px 0 72px;display:grid;grid-template-columns:1.16fr .84fr;gap:48px;align-items:center}.eyebrow{color:var(--cyan);font-size:11px;font-weight:900;letter-spacing:.2em;text-transform:uppercase}.hero .eyebrow{display:inline-flex;align-items:center;gap:10px;padding:9px 14px;border:1px solid rgba(53,220,255,.35);border-radius:999px;background:rgba(10,52,94,.35);box-shadow:0 0 28px rgba(0,175,255,.08)}h1{font-size:clamp(43px,6.5vw,78px);line-height:.99;letter-spacing:-.065em;margin:22px 0 20px;font-weight:900}h1 em{font-style:normal;color:var(--cyan);text-shadow:0 0 35px rgba(53,220,255,.2)}.lead{color:#c1d0e8;font-size:17px;line-height:1.85;max-width:670px}.lead strong{color:#fff}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 18px;border-radius:13px;font-weight:800;font-size:13px;letter-spacing:.01em;border:1px solid rgba(94,159,255,.38);background:linear-gradient(145deg,rgba(23,47,83,.95),rgba(12,27,51,.95));transition:transform .2s,border-color .2s,box-shadow .2s}.btn.primary{background:linear-gradient(110deg,#167dff,#25c9ef);border:0;color:white;box-shadow:0 9px 28px rgba(16,139,255,.25)}.btn:hover{transform:translateY(-3px);border-color:var(--cyan);box-shadow:0 12px 30px rgba(0,157,255,.18)}.hero-card{background:linear-gradient(145deg,rgba(23,50,91,.88),rgba(7,16,34,.96));border:1px solid var(--line);border-radius:27px;padding:16px;box-shadow:var(--glow),inset 0 1px rgba(255,255,255,.06);position:relative;overflow:hidden}.hero-card:before{content:"";position:absolute;inset:-1px;background:radial-gradient(circle at 50% 0%,rgba(53,220,255,.15),transparent 52%);pointer-events:none}.orb{min-height:280px;border-radius:19px;background:linear-gradient(145deg,#07152b,#0a1e3d);display:grid;place-items:center;position:relative;overflow:hidden;padding:12px}.orb:before,.orb:after{content:"";position:absolute;width:280px;height:280px;border:1px solid #ffffff28;border-radius:50%;transform:rotate(35deg) scaleY(.45)}.orb:after{transform:rotate(-35deg) scaleY(.45)}.brand-art{width:100%;height:100%;max-height:330px;object-fit:contain;display:block;border-radius:14px;position:relative;z-index:1}.card-caption{padding:14px 8px 5px;color:#d4e5ff;font-size:13px}.card-caption strong{letter-spacing:.14em;color:#fff}.card-caption span{color:var(--cyan)}
+section{padding:54px 0}.section-head{margin-bottom:24px}.section-head h2{font-size:clamp(26px,3vw,34px);line-height:1.2;letter-spacing:-.035em;margin:8px 0}.section-head p{color:var(--muted);margin:0;max-width:720px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.social-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.social-card{display:block;transition:transform .22s,border-color .22s,box-shadow .22s}.social-card:hover{transform:translateY(-5px);border-color:rgba(53,220,255,.72);box-shadow:0 18px 42px rgba(0,120,255,.14)}.tile{background:linear-gradient(145deg,rgba(17,34,62,.92),rgba(10,21,41,.96));border:1px solid var(--line);border-radius:20px;padding:23px;box-shadow:inset 0 1px rgba(255,255,255,.035)}.tile h3{margin:10px 0 6px;font-size:18px;letter-spacing:-.02em}.tile p{margin:0;color:var(--muted);font-size:14px}.icon{font-size:25px}.skills{display:flex;flex-wrap:wrap;gap:10px}.skill{background:rgba(21,42,72,.82);border:1px solid rgba(95,140,200,.3);border-radius:999px;padding:9px 14px;color:#e8f4ff;font-size:13px;font-weight:650}.project{display:grid;grid-template-columns:1fr 1fr;gap:27px;align-items:center;background:linear-gradient(130deg,rgba(20,45,82,.94),rgba(8,18,37,.98));border:1px solid var(--line);border-radius:24px;padding:25px;box-shadow:var(--glow)}.project-art{min-height:260px;border-radius:17px;background:radial-gradient(circle at 50% 45%,#fff0a6 0 2%,#ffc45e 5%,#a14aff 16%,#344b91 35%,#17233b 68%);display:grid;place-items:center;text-align:center;position:relative;overflow:hidden}.project-art img{width:100%;height:100%;max-height:440px;object-fit:cover;border-radius:16px;display:block}.project ul{color:var(--muted);padding-left:20px}.status{display:inline-flex;background:rgba(16,62,89,.7);color:#8fe8ff;border:1px solid rgba(53,220,255,.35);padding:6px 11px;border-radius:999px;font-size:11px;font-weight:900;letter-spacing:.08em}.note{color:var(--muted);font-size:12px}.gameplay-video{display:block;width:100%;max-height:680px;background:#050914;border-radius:14px}.discord-art{display:block;width:100%;height:auto;max-height:260px;object-fit:cover;object-position:center;border-radius:14px;border:1px solid rgba(130,115,255,.4);margin-bottom:16px}.discord-card{background:radial-gradient(circle at 90% 0%,rgba(125,84,255,.19),transparent 42%),linear-gradient(145deg,#15183f,#0a1732)}.discord-card .btn{background:linear-gradient(110deg,#6555f5,#9a63ff);border:0;box-shadow:0 8px 24px rgba(112,80,255,.24);margin-top:16px}.steps{counter-reset:step}.step{display:flex;gap:14px;margin:15px 0}.num{flex:0 0 32px;height:32px;border-radius:10px;background:#243655;color:var(--cyan);display:grid;place-items:center;font-weight:900}footer{padding:34px 0 50px;border-top:1px solid rgba(151,190,255,.14);color:var(--muted);font-size:12px}
+@media(max-width:820px){.hero{grid-template-columns:1fr;gap:28px;padding:62px 0 52px}.hero-card{max-width:540px}.orb{min-height:220px}.project{grid-template-columns:1fr}.navlinks{gap:13px;font-size:12px}}@media(max-width:600px){.wrap{width:min(100% - 32px,1160px)}nav{align-items:flex-start;flex-direction:column;padding:18px 0}.navlinks{width:100%;overflow-x:auto;padding-bottom:4px;white-space:nowrap}.hero{padding:48px 0 38px}h1{font-size:clamp(40px,12vw,58px)}.lead{font-size:15px}.actions{gap:9px}.btn{font-size:12px;padding:11px 13px}.grid,.social-grid{grid-template-columns:1fr}.project{padding:16px}.project-art{min-height:0}.project-art img{max-height:none}.tile{padding:19px}section{padding:42px 0}}
 </style>
 </head>
 <body>
-<nav class="nav">
- <div class="container nav-inner">
-  <a href="#top" class="logo-wrap"><img class="logo" src="raldzg-logo-round.png" alt="RaldzG logo"></a>
-  <div class="nav-links"><a href="#about">About</a><a href="#skills">Skills</a><a href="#work">Work</a><a href="#services">Services</a></div>
-  <a class="nav-cta" href="https://www.facebook.com/profile.php?id=61577536628423" target="_blank" rel="noopener">Message</a>
- </div>
-</nav>
-
-<header class="hero" id="top">
- <svg class="corner-accent" viewBox="0 0 260 90" aria-hidden="true"><path d="M4 70 L45 70 L70 45 L230 45" fill="none" stroke="url(#cg)" stroke-width="1.4"/><circle cx="230" cy="45" r="4" fill="var(--gold)"/><circle cx="245" cy="30" r="2.5" fill="none" stroke="var(--gold)" stroke-width="1.2"/><defs><linearGradient id="cg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="var(--gold)" stop-opacity=".1"/><stop offset="1" stop-color="var(--gold)" stop-opacity=".8"/></linearGradient></defs></svg>
- <div class="container hero-grid">
-  <div>
-   <span class="eyebrow"><i></i> Video Editor &amp; Content Creator · Philippines</span>
-   <span class="eyebrow" style="color:#8fe07a;margin-left:10px"><i style="background:#8fe07a"></i> Available for projects</span>
-   <h1>I edit.<br>I create.<br>I tell stories.</h1>
-   <p class="hero-copy">RaldzG crafts high-quality video edits, original music, and story-driven content — with web, app, and UI/UX design as an added edge for full-package projects. Real samples, playable right here.</p>
-   <div class="actions">
-    <a class="btn primary" href="#work">See my work</a>
-    <a class="btn secondary" href="https://www.facebook.com/profile.php?id=61577536628423" target="_blank" rel="noopener">Message on Facebook</a>
-   </div>
-  </div>
-
-  <div class="badge-card">
-   <div class="badge-clip"></div>
-   <div class="badge-photo"><img src="raldzg-profile-clear.png" alt="Portrait of RaldzG, digital creator"></div>
-   <div class="badge-meta">
-    <div class="badge-name">RaldzG</div>
-    <div class="badge-role">Video Editor<br>&amp; Content Creator</div>
-   </div>
-   <div class="badge-strip">
-    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-   </div>
-   <div class="badge-foot"><span>ISSUED · PH</span><span>NO EXPIRY</span></div>
-  </div>
- </div>
-</header>
-
+<div class="wrap">
+<nav><a class="logo" href="#">RALDZ<span>G</span>143</a><div class="navlinks"><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#gameplay">Gameplay</a><a href="#social">Socials</a><a href="#contact">Contact</a></div></nav>
 <main>
-<section id="about"><div class="container">
- <div class="section-head"><div><span class="eyebrow"><i></i> About</span><h2>Digital work with purpose.</h2></div></div>
- <div class="about-grid">
-  <div class="about-main">
-   <p class="lead">Video edits and stories that connect.</p>
-   <p>RaldzG crafts video edits, original music, and story-driven content — plus Android apps, websites, and UI/UX design for clients who want the full package. Every project shaped around the audience it's actually for.</p>
-  </div>
-  <div class="about-side">
-   <strong>Creative + technical</strong>
-   <p>One person handling both the edit and the story around it, so nothing gets lost between the two.</p>
-   <div class="pill-row">
-    <span class="pill">Video Editing</span><span class="pill">Song Creation</span><span class="pill">Story Writing</span><span class="pill">AI Animation</span><span class="pill">Android Apps</span><span class="pill">Web Dev</span><span class="pill">Web Design</span>
-   </div>
-  </div>
- </div>
-</div></section>
+<div class="hero">
+<div>
+<div class="eyebrow">Roblox Game Developer · Independent Creator</div>
+<h1>Building worlds.<br><em>Creating gameplay.</em></h1>
+<p class="lead">Hi, I'm RaldzG143. I'm the solo developer and owner of <strong>EGGORA</strong>, a Roblox game that is currently public for testing. I built it on my own, and development is approximately 55% complete. I enjoy working across game systems, world building, 3D modeling, scripting, UI, animation, and visual effects.</p>
+<div class="actions"><a class="btn primary" href="https://www.roblox.com/share?code=7187822339f56b4fbf321618ce9aa70c&type=ExperienceDetails&stamp=1794484044041" target="_blank" rel="noopener noreferrer">Play EGGORA on Roblox ↗</a><a class="btn" href="#projects">View Game Showcase</a><a class="btn" href="https://www.tiktok.com/@gwapzly?is_from_webapp=1&amp;sender_device=pc" target="_blank" rel="noopener noreferrer">TikTok @gwapzly ↗</a><a class="btn" href="https://discord.gg/vJp2EmNvU" target="_blank" rel="noopener noreferrer">Join my Discord ↗</a><a class="btn" href="#contact">Contact</a></div>
+<p class="note">Portfolio status: personal project showcase · Development: actively building, testing, and improving</p>
+</div>
+<div class="hero-card"><div class="orb"><img class="brand-art" src="assets/raidzg-studios-logo.png" alt="RaidzG Studios logo"></div><div class="card-caption"><strong>RAIDZG STUDIOS</strong><br>Build · Play · Together</div></div>
+</div>
 
-<section id="skills"><div class="container">
- <div class="section-head"><div><span class="eyebrow"><i></i> Skills</span><h2>What I do.</h2></div><p class="section-desc">Video editing and content creation at the core — with web, app, and UI/UX design as an added edge.</p></div>
- <div class="skills">
-  <article class="skill orange"><div class="skill-mark"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20M6 6l3 4M11 6l3 4M16 6l3 4"/></svg></div><h3>Video Editing</h3><p>High-quality edits that bring your vision to life.</p></article>
-  <article class="skill red"><div class="skill-mark"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M9 18V5l10-2v13M9 18a3 3 0 11-6 0 3 3 0 016 0zM19 16a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div><h3>Song Creation</h3><p>Original songs, lyrics and composition.</p></article>
-  <article class="skill gold"><div class="skill-mark"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z"/></svg></div><h3>Short Story Creation</h3><p>Engaging stories that inspire and connect.</p></article>
-  <article class="skill cyan"><div class="skill-mark"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M10 9l5 3-5 3V9z" fill="currentColor" stroke="none"/></svg></div><h3>AI Animation</h3><p>Creative animations that tell your story.</p></article>
-  <article class="skill green skill-clickable" onclick="openAppShowcase()" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openAppShowcase()"><div class="skill-mark"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div><h3>Android App Development</h3><p>Custom Android apps that solve real problems.</p><span class="skill-hint">View concept →</span></article>
-  <article class="skill blue"><div class="skill-mark"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M9 8l-4 4 4 4M15 8l4 4-4 4"/></svg></div><h3>Website Development</h3><p>Fast, responsive and modern websites.</p></article>
-  <article class="skill purple skill-clickable" onclick="openCaseStudy()" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openCaseStudy()"><div class="skill-mark"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M18 3l3 3-9.5 9.5-4 1 1-4L18 3z"/><path d="M5 21c1-3 1-5 4-5"/></svg></div><h3>Website Design</h3><p>Clean, user-friendly and professional designs.</p><span class="skill-hint">View concept →</span></article>
- </div>
-</div></section>
+<section id="about">
+<div class="section-head"><div class="eyebrow">About me</div><h2>A creator learning by building</h2><p>I am developing my skills through hands-on work on my own Roblox game project.</p></div>
+<div class="tile"><p>My current focus is creating an enjoyable Roblox experience from the ground up. I am interested in both the creative and technical sides of game development—from planning gameplay features and designing environments to working with scripts and visual presentation. I am open to learning from other developers and collaborating on suitable projects.</p></div>
+</section>
 
-<section id="work"><div class="container">
- <div class="section-head"><div><span class="eyebrow"><i></i> Portfolio</span><h2>Selected work.</h2></div><p class="section-desc">Real video samples, playable right here.</p></div>
+<section id="skills">
+<div class="section-head"><div class="eyebrow">Development areas</div><h2>Skills & current focus</h2><p>These are the areas I work on or am actively developing. They are not presented as years of professional experience or expert-level claims.</p></div>
+<div class="skills">
+<span class="skill">Roblox Map Building</span><span class="skill">Game Systems</span><span class="skill">Blender 3D Modeling</span><span class="skill">Luau Scripting</span><span class="skill">UI Design</span><span class="skill">Animation</span><span class="skill">VFX / Effects</span>
+</div>
+</section>
 
- <div class="video-grid">
-  <article class="video-card"><div class="video-wrap"><video controls playsinline preload="metadata"><source src="raldzg-sample-video.mp4" type="video/mp4"></video></div><div class="video-info"><div class="tag">Featured video</div><h3>Creative video showcase.</h3><p>A featured sample for video editing, generated visuals, and creative content.</p></div></article>
-  <article class="video-card"><div class="video-wrap"><video controls playsinline preload="metadata"><source src="raldzg-music-custom-song.mp4" type="video/mp4"></video></div><div class="video-info"><div class="tag">Music · Custom songs</div><h3>Let's create your music.</h3><p>An invitation piece for original songs made for projects, stories, brands, or personal moments.</p></div></article>
-  <article class="video-card"><div class="video-wrap"><video controls playsinline preload="metadata"><source src="raldzg-story-video.mp4" type="video/mp4"></video></div><div class="video-info"><div class="tag">Story video · Sample</div><h3>Story video sample.</h3><p>A sample story video showing visual storytelling and generated content.</p></div></article>
-  <article class="video-card"><div class="video-wrap"><video controls playsinline preload="metadata"><source src="raldzg-song-sample.mp4" type="video/mp4"></video></div><div class="video-info"><div class="tag">Music · Original song</div><h3>Fully animated music video.</h3><p>An original song brought to life with anime-style animation and on-screen lyrics — a nostalgic story built frame by frame, not just edited over stock footage.</p></div></article>
- </div>
-</div></section>
+<section id="projects">
+<div class="section-head"><div class="eyebrow">Featured project</div><h2>Project showcase</h2><p>EGGORA is already public on Roblox for testing, but it is not finished. I am its sole developer and owner.</p></div>
+<div class="project">
+<div class="project-art"><img src="assets/eggora-game-showcase.png" alt="EGGORA Roblox game promotional artwork"></div>
+<div>
+<span class="status">PUBLIC TESTING · 55% COMPLETE</span><h2 style="margin:12px 0 4px">EGGORA</h2>
+<p style="color:var(--muted)">EGGORA is my own Roblox fantasy adventure game. I planned and built the project by myself, and I am the sole creator and owner. The experience is publicly accessible for testing while I continue development.</p>
+<ul><li>Solo-developed and owned by RaldzG143</li><li>Publicly available on Roblox for testing purposes only</li><li>Approximately 55% complete; active development continues</li><li>Fantasy environments, egg and creature systems, gameplay mechanics, and visual effects</li></ul>
+<p class="note">Development status: 55% complete. The game is public for testing purposes only and is not a finished release. Features, systems, and gameplay may change as development continues.</p>
+</div>
+</div>
+</section>
 
+<section id="gameplay">
+<div class="section-head"><div class="eyebrow">Gameplay preview</div><h2>See EGGORA in action</h2><p>A short gameplay recording showing the game currently in development.</p></div>
+<div class="tile" style="padding:12px">
+<video class="gameplay-video" controls playsinline preload="metadata" poster="assets/eggora-game-showcase.png">
+<source src="assets/eggora-gameplay-demo.mp4" type="video/mp4">
+Your browser does not support the video element.
+</video>
+<div class="actions" style="margin:14px 4px 4px"><a class="btn primary" href="https://www.roblox.com/share?code=7187822339f56b4fbf321618ce9aa70c&type=ExperienceDetails&stamp=1794484044041" target="_blank" rel="noopener noreferrer">Play EGGORA on Roblox ↗</a></div>
+</div>
+</section>
 
-<section id="services"><div class="container">
- <div class="section-head"><div><span class="eyebrow"><i></i> Services</span><h2>From idea to output.</h2></div></div>
- <div class="services">
-  <article class="service"><h3>Video &amp; story creation</h3><p>Video editing, generated videos, animated stories, and custom story concepts.</p></article>
-  <article class="service"><h3>Original music</h3><p>Original music production and sound for creative projects.</p></article>
-  <article class="service"><h3>Apps &amp; websites</h3><p>Android app development, website builds, and responsive digital experiences.</p></article>
-  <article class="service"><h3>UI/UX design</h3><p>Interface concepts and layouts focused on clarity and usability.</p></article>
- </div>
-</div></section>
+<section>
+<div class="section-head"><div class="eyebrow">How I work</div><h2>My development approach</h2></div>
+<div class="grid">
+<div class="tile"><div class="icon">🧭</div><h3>Plan the experience</h3><p>Think through the player journey, core loop, and purpose of each feature.</p></div>
+<div class="tile"><div class="icon">🛠️</div><h3>Build and test</h3><p>Work on the environment, systems, assets, and presentation, then improve them through testing.</p></div>
+<div class="tile"><div class="icon">✨</div><h3>Keep improving</h3><p>Learn new techniques, refine details, and stay open to feedback and collaboration.</p></div>
+</div>
+</section>
 
-<section id="contact"><div class="container">
- <div class="cta">
-  <div class="cta-main">
-   <span class="eyebrow"><i></i> Let's create</span>
-   <h2>Have an idea?</h2>
-   <p>Send your concept, project brief, or content idea, and let's turn it into something useful and creative.</p>
-   <p class="signoff">Let's create something <em>amazing</em> together!</p>
-   <div class="actions"><a class="btn primary" href="https://www.facebook.com/profile.php?id=61577536628423" target="_blank" rel="noopener">Message RaldzG on Facebook</a><a class="btn secondary" href="mailto:raldzgojanola@gmail.com">Email RaldzG</a></div>
-  </div>
-  <div class="cta-side">
-   <strong>RaldzG</strong>
-   <p class="contact-line">Video Editor &amp; Content Creator · Philippines</p>
-   <p class="contact-line"><a href="mailto:raldzgojanola@gmail.com" style="color:var(--gold-hi)">raldzgojanola@gmail.com</a></p>
-   <div class="pill-row"><span class="pill">Video Editing</span><span class="pill">Song Creation</span><span class="pill">Story Writing</span><span class="pill">AI Animation</span><span class="pill">Android Apps</span><span class="pill">Web Dev</span><span class="pill">Web Design</span></div>
-  </div>
- </div>
-</div></section>
+<section id="social">
+<div class="section-head"><div class="eyebrow">Social & community</div><h2>Follow my work</h2><p>Watch my Roblox development clips and join the community. Click the TikTok profile image to open my account.</p></div>
+<div class="grid social-grid">
+<a class="tile social-card" href="https://www.tiktok.com/@gwapzly?is_from_webapp=1&amp;sender_device=pc" target="_blank" rel="noopener noreferrer" aria-label="Visit RaldzG's TikTok profile @gwapzly">
+<img src="assets/tiktok-gwapzly-profile.jpg" alt="Screenshot of RaldzG TikTok profile @gwapzly" style="display:block;width:100%;height:auto;border-radius:12px;border:1px solid #24518a">
+<h3>TikTok · @gwapzly ↗</h3><p>Follow for Roblox gameplay, EGGORA updates, and livestream content. Click this card to visit my TikTok profile.</p>
+</a>
+<a class="tile social-card discord-card" href="https://discord.gg/vJp2EmNvU" target="_blank" rel="noopener noreferrer" aria-label="Join RaldzG143 on Discord"><img class="discord-art" src="assets/discord-community-banner.png" alt="Join my Discord community banner"><h3>Join my Discord community ↗</h3><p>Connect with me, follow EGGORA development updates, share ideas, and meet other players and creators.</p><span class="btn">Join Discord Server ↗</span></a>
+</div>
+</section>
+
+<section id="contact">
+<div class="section-head"><div class="eyebrow">Contact</div><h2>Let's connect</h2><p>Interested in discussing a Roblox project or collaboration? You can find me using the username below.</p></div>
+<div class="tile">
+<h3>Roblox username</h3><p style="font-size:22px;color:var(--text);font-weight:800">RaldzG143</p>
+<p class="note">Connect with me on TikTok at @gwapzly or join my Discord community using the links above. For EGGORA, use the Play EGGORA button to visit the Roblox experience.</p>
+</div>
+</section>
 </main>
-
-<footer><div class="container" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px">
- <span>© 2026 RaldzG · Video Editor &amp; Content Creator</span>
- <span style="display:flex;gap:16px">
-  <a href="mailto:raldzgojanola@gmail.com" style="color:var(--muted)">raldzgojanola@gmail.com</a>
-  <a href="https://www.facebook.com/profile.php?id=61577536628423" target="_blank" rel="noopener" style="color:var(--muted)">Facebook</a>
- </span>
-</div></footer>
-
-<div class="cs-modal-overlay" id="csModal" onclick="if(event.target===this)closeCaseStudy()">
- <div class="cs-modal">
-  <button type="button" class="cs-modal-close" onclick="closeCaseStudy()" aria-label="Close">&times;</button>
-  <div class="case-study pf-mock">
-   <div class="pf-nav">
-    <div class="pf-logo">RG</div>
-    <nav class="pf-nav-links"><a class="active">Home</a><a>About</a><a>Work</a><a>Services</a><a>Blog</a><a>Contact</a></nav>
-    <span class="pf-nav-cta">Let's Talk →</span>
-   </div>
-
-   <div class="pf-hero">
-    <div class="pf-hero-copy">
-     <span class="pf-eyebrow"><span class="pf-dot"></span>AVAILABLE FOR PROJECTS</span>
-     <h4 class="pf-h1">Digital experiences that <span class="pf-accent">inspire</span> action.</h4>
-     <p class="pf-sub">I design and build modern websites, applications, and digital products that are fast, beautiful, and built to make an impact.</p>
-     <div class="pf-cta-row">
-      <span class="pf-btn-primary">View My Work →</span>
-      <span class="pf-btn-secondary">About Me</span>
-     </div>
-     <div class="pf-tools">
-      <span class="pf-tools-label">TOOLS I USE</span>
-      <div class="pf-tools-row">
-       <span class="pf-tool" style="--tc:#8B5CF6">Fi</span>
-       <span class="pf-tool" style="--tc:#31A8FF">Ps</span>
-       <span class="pf-tool" style="--tc:#FF9A00">Ai</span>
-       <span class="pf-tool" style="--tc:#9999FF">Ae</span>
-       <span class="pf-tool" style="--tc:#61DAFB">Rx</span>
-       <span class="pf-tool" style="--tc:#38BDF8">Tw</span>
-      </div>
-     </div>
-    </div>
-    <div class="pf-hero-visual">
-     <div class="pf-blob"></div>
-     <div class="pf-laptop">
-      <div class="pf-laptop-bar"><span class="pf-mini-logo">RG</span><span class="pf-mini-nav">Work · About · Services</span><span class="pf-mini-cta">Contact Us →</span></div>
-      <div class="pf-laptop-body">
-       <h5>Building digital products that <span>drive results.</span></h5>
-       <p>We help startups and brands turn ideas into powerful digital experiences.</p>
-       <span class="pf-mini-btn">See Our Work →</span>
-      </div>
-     </div>
-     <div class="pf-phone">
-      <div class="pf-phone-bar"><span class="pf-mini-logo sm">RG</span><span class="pf-phone-menu">≡</span></div>
-      <div class="pf-phone-body">
-       <h6>Designing meaningful digital <span>experiences.</span></h6>
-       <span class="pf-mini-btn sm">View Work</span>
-       <div class="pf-phone-card"><b>01</b>Featured Project</div>
-      </div>
-     </div>
-     <div class="pf-stat-card"><strong>50+</strong><span>Projects Completed</span></div>
-    </div>
-   </div>
-
-   <div class="pf-work">
-    <div class="pf-work-head">
-     <div><span class="pf-eyebrow-plain">FEATURED WORK</span><h5>Selected Projects</h5></div>
-     <span class="pf-view-all">View All Projects →</span>
-    </div>
-    <div class="pf-project-grid">
-     <div class="pf-project"><div class="pf-thumb pf-thumb-1"></div><span class="pf-pnum">01</span><h6>Fintech Dashboard</h6><div class="pf-tags"><span>UI/UX Design</span><span>Web App</span></div></div>
-     <div class="pf-project"><div class="pf-thumb pf-thumb-2"></div><span class="pf-pnum">02</span><h6>E-commerce Website</h6><div class="pf-tags"><span>UI/UX Design</span><span>Web Design</span></div></div>
-     <div class="pf-project"><div class="pf-thumb pf-thumb-3"></div><span class="pf-pnum">03</span><h6>SaaS Landing Page</h6><div class="pf-tags"><span>UI/UX Design</span><span>Web Design</span></div></div>
-     <div class="pf-project"><div class="pf-thumb pf-thumb-4"></div><span class="pf-pnum">04</span><h6>Travel Website</h6><div class="pf-tags"><span>UI/UX Design</span><span>Web Design</span></div></div>
-    </div>
-   </div>
-
-   <div class="pf-features">
-    <div class="pf-feature"><div class="pf-fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg></div><div><strong>Pixel Perfect</strong><span>Design that's precise</span></div></div>
-    <div class="pf-feature"><div class="pf-fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></div><div><strong>Performance First</strong><span>Fast, optimized & scalable</span></div></div>
-    <div class="pf-feature"><div class="pf-fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg></div><div><strong>User Focused</strong><span>Built for real people</span></div></div>
-    <div class="pf-feature"><div class="pf-fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 6 2 12l6 6M16 6l6 6-6 6"/></svg></div><div><strong>Clean Code</strong><span>Structured & maintainable</span></div></div>
-    <div class="pf-feature"><div class="pf-fico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div><div><strong>On-time Delivery</strong><span>Reliable & efficient</span></div></div>
-   </div>
-
-   <div class="cs-caption">
-    <div class="tag">UI/UX · Website Design</div>
-    <h3>Personal portfolio site — design concept</h3>
-    <p>A self-directed landing page concept exploring a modern dark theme — an animated hero visual, a clean project grid, and small motion details that give the interface a sense of life.</p>
-   </div>
-  </div>
- </div>
+<footer>© 2026 RaldzG143 · Roblox Game Developer Portfolio · Built to showcase an in-progress personal project.</footer>
 </div>
-
-<div class="cs-modal-overlay" id="appModal" onclick="if(event.target===this)closeAppShowcase()">
- <div class="cs-modal">
-  <button type="button" class="cs-modal-close" onclick="closeAppShowcase()" aria-label="Close">&times;</button>
-  <div class="case-study ap-mock">
-   <div class="ap-top">
-    <div class="ap-brand"><span class="ap-brand-mark">RG</span><div><strong>RaldzG</strong><small>DIGITAL CREATOR APP</small></div></div>
-    <p class="ap-tagline">All-in-one app for my digital world.</p>
-   </div>
-
-   <div class="ap-phones">
-    <div class="ap-ring"></div>
-    <span class="ap-rock r1"></span><span class="ap-rock r2"></span><span class="ap-rock r3"></span><span class="ap-rock r4"></span>
-
-    <div class="ap-phone ap-phone-left">
-     <div class="ap-status"><span>9:41</span><span class="ap-status-icons">▂▄▆ ᴡɪꜰɪ 🔋</span></div>
-     <div class="ap-screen">
-      <p class="ap-hey">Hey, RaldzG! 👋</p>
-      <p class="ap-sub">Welcome back to your creative dashboard.</p>
-      <span class="ap-label">Overview</span>
-      <div class="ap-stat-grid">
-       <div class="ap-stat"><strong>24</strong><span>Projects Active</span></div>
-       <div class="ap-stat"><strong>12</strong><span>Clients Total</span></div>
-       <div class="ap-stat"><strong>328</strong><span>Hours This Month</span></div>
-       <div class="ap-stat"><strong>8.2K</strong><span>Followers</span></div>
-      </div>
-     </div>
-    </div>
-
-    <div class="ap-phone ap-phone-center">
-     <div class="ap-status"><span>9:41</span><span class="ap-status-icons">▂▄▆ ᴡɪꜰɪ 🔋</span></div>
-     <div class="ap-screen ap-screen-hero">
-      <div class="ap-hero-head"><span class="ap-menu">≡</span><span class="ap-avatar"></span></div>
-      <h4 class="ap-h1">RaldzG</h4>
-      <span class="ap-sub2">Digital Creator —</span>
-      <p class="ap-desc">I create digital experiences through apps, websites, design, videos and music.</p>
-      <div class="ap-cta-row">
-       <span class="ap-btn">View My Work →</span>
-       <span class="ap-play">▶ Play Reel</span>
-      </div>
-      <div class="ap-device-stack">
-       <div class="ap-laptop"></div>
-       <div class="ap-mini-phone"></div>
-      </div>
-     </div>
-    </div>
-
-    <div class="ap-phone ap-phone-right">
-     <div class="ap-status"><span>9:41</span><span class="ap-status-icons">▂▄▆ ᴡɪꜰɪ 🔋</span></div>
-     <div class="ap-screen">
-      <div class="ap-proj-head"><strong>My Projects</strong><small>View all</small></div>
-      <div class="ap-filter-row"><span class="active">All</span><span>Web</span><span>Mobile</span></div>
-      <div class="ap-proj-card"><span class="ap-pnum">01</span><div><b>Fintech Dashboard</b><small>UI/UX Design</small></div></div>
-      <div class="ap-proj-card"><span class="ap-pnum">02</span><div><b>E-commerce App</b><small>Android Application</small></div></div>
-      <div class="ap-proj-card"><span class="ap-pnum">03</span><div><b>Travel Website</b><small>Web Development</small></div></div>
-     </div>
-    </div>
-   </div>
-
-   <div class="ap-services">
-    <h5 class="ap-services-title">Everything I do, <span>in one place.</span></h5>
-    <div class="ap-service-grid">
-     <div class="ap-service"><div class="ap-sico green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 8l-4 4 4 4M15 8l4 4-4 4"/></svg></div><div><b>Web Development</b><small>Fast, modern and responsive websites that perform.</small></div><span class="ap-arrow">→</span></div>
-     <div class="ap-service"><div class="ap-sico blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div><div><b>Android Development</b><small>Powerful mobile apps built for Android devices.</small></div><span class="ap-arrow">→</span></div>
-     <div class="ap-service"><div class="ap-sico purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 3l3 3-9.5 9.5-4 1 1-4L18 3z"/></svg></div><div><b>UI/UX Design</b><small>Clean, user-friendly and modern interface design.</small></div><span class="ap-arrow">→</span></div>
-     <div class="ap-service"><div class="ap-sico orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20M6 6l3 4M11 6l3 4M16 6l3 4"/></svg></div><div><b>Video Editing</b><small>High-quality edits that bring stories to life.</small></div><span class="ap-arrow">→</span></div>
-     <div class="ap-service"><div class="ap-sico red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18V5l10-2v13M9 18a3 3 0 11-6 0 3 3 0 016 0zM19 16a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div><div><b>Song Creation</b><small>Original music, lyrics and creative composition.</small></div><span class="ap-arrow">→</span></div>
-     <div class="ap-service"><div class="ap-sico cyan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 3 8l9 5 9-5-9-5zM3 16l9 5 9-5M3 12l9 5 9-5"/></svg></div><div><b>Branding</b><small>Logos, identity and branding that stands out.</small></div><span class="ap-arrow">→</span></div>
-    </div>
-    <div class="ap-cta-bar"><span class="ap-bolt">⚡</span><p>Let's build something awesome together.</p><span class="ap-start-btn">Start a Project →</span></div>
-   </div>
-
-   <div class="cs-caption">
-    <div class="tag">UI/UX · App Design</div>
-    <h3>Digital creator app — design concept</h3>
-    <p>A self-directed mobile app concept for managing projects, clients, and creative work — dashboard, profile screen, and project list, designed as one connected system.</p>
-   </div>
-  </div>
- </div>
-</div>
-
-<script>
-function openCaseStudy(){
-  var m = document.getElementById('csModal');
-  m.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeCaseStudy(){
-  var m = document.getElementById('csModal');
-  m.classList.remove('open');
-  document.body.style.overflow = '';
-}
-function openAppShowcase(){
-  var m = document.getElementById('appModal');
-  m.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeAppShowcase(){
-  var m = document.getElementById('appModal');
-  m.classList.remove('open');
-  document.body.style.overflow = '';
-}
-document.addEventListener('keydown', function(e){
-  if(e.key === 'Escape'){ closeCaseStudy(); closeAppShowcase(); }
-});
-
-/* scroll reveal */
-(function(){
-  var targets = document.querySelectorAll('.section-head, .about-main, .about-side, .skill, .video-card, .service, .cta-main, .cta-side');
-  targets.forEach(function(el){ el.classList.add('reveal'); });
-  if('IntersectionObserver' in window){
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting){
-          entry.target.classList.add('in');
-          io.unobserve(entry.target);
-        }
-      });
-    }, {threshold:.12, rootMargin:'0px 0px -40px 0px'});
-    targets.forEach(function(el){ io.observe(el); });
-  } else {
-    targets.forEach(function(el){ el.classList.add('in'); });
-  }
-})();
-
-/* nav scroll state */
-(function(){
-  var nav = document.querySelector('.nav');
-  if(!nav) return;
-  var onScroll = function(){
-    if(window.scrollY > 12) nav.classList.add('scrolled');
-    else nav.classList.remove('scrolled');
-  };
-  window.addEventListener('scroll', onScroll, {passive:true});
-  onScroll();
-})();
-
-/* badge-card mouse tilt */
-(function(){
-  var card = document.querySelector('.badge-card');
-  if(!card || window.matchMedia('(pointer: coarse)').matches) return;
-  card.addEventListener('mouseenter', function(){
-    card.style.animationPlayState = 'paused';
-  });
-  card.addEventListener('mousemove', function(e){
-    var r = card.getBoundingClientRect();
-    var px = (e.clientX - r.left)/r.width - .5;
-    var py = (e.clientY - r.top)/r.height - .5;
-    card.style.transform = 'perspective(900px) rotateY(' + (px*10) + 'deg) rotateX(' + (py*-10) + 'deg) translateY(-4px)';
-  });
-  card.addEventListener('mouseleave', function(){
-    card.style.transform = '';
-    card.style.animationPlayState = 'running';
-  });
-})();
-</script>
 </body>
 </html>
